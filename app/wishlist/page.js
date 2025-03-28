@@ -7,7 +7,6 @@ import { getwishlist } from '@/actions/useractions'
 import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { allproducts } from '@/actions/useractions'
-import { useRef } from 'react'
 
 const Page = () => {
   const { data: session } = useSession()

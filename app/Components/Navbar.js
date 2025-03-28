@@ -3,7 +3,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useSession, signOut } from "next-auth/react"
 import { getsearchdata } from '@/actions/useractions'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
