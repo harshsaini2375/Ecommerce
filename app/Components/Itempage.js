@@ -23,7 +23,7 @@ const Itempage = ({ productname }) => {
     useEffect(() => {
         getallproducts();
         getstatus();
-    }, [session])
+    }, [])
 
 
     const getallproducts = async () => {

@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react'
 import { allproducts } from '@/actions/useractions'
 import Product from '../Components/Product'
 
-const page = () => {
+const Page = () => {
 
     const [productarr, setproductarr] = useState([]);
 
@@ -38,4 +38,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page
