@@ -9,7 +9,7 @@ import { useSession } from 'next-auth/react'
 import { allproducts } from '@/actions/useractions'
 import { useRef } from 'react'
 
-const page = () => {
+const Page = () => {
   const { data: session } = useSession()
   const [wishlistarr, setwishlistarr] = useState([])
   const [justforyouarr, setjustforyouarr] = useState([])
@@ -73,4 +73,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

@@ -11,7 +11,7 @@ import { useSearchParams } from 'next/navigation'
 import { allproducts } from '@/actions/useractions'
 import Image from 'next/image'
 
-const page = () => {
+const Page = () => {
     const searchParams = useSearchParams();
     const categorytype = searchParams.get("type");
 
@@ -71,4 +71,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

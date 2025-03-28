@@ -10,7 +10,7 @@ import { useState } from 'react'
 import { useRef } from 'react'
 import Link from 'next/link'
 
-const page = () => {
+const Page = () => {
 
   const { data: session } = useSession()
   // we use ? here as session takes time to load , before loading it is undefined which can cause issue
@@ -129,4 +129,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

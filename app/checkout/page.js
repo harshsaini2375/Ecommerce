@@ -14,7 +14,7 @@ import { useSession } from 'next-auth/react'
 import { getcart } from '@/actions/useractions'
 
 
-const page = () => {
+const Page = () => {
     const searchParams = useSearchParams();
     const productname = searchParams.get("name");
     const carttotal = searchParams.get("carttotal");
@@ -201,4 +201,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
