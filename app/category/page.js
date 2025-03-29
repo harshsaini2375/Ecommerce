@@ -10,6 +10,8 @@ import Product from '../Components/Product'
 import { useSearchParams } from 'next/navigation'
 import { allproducts } from '@/actions/useractions'
 import Image from 'next/image'
+import { Suspense } from 'react'
+
 
 const Page = () => {
     const searchParams = useSearchParams();
@@ -71,4 +73,10 @@ const Page = () => {
     )
 }
 
-export default Page
+const WrappedMyPage = () => (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Page />
+    </Suspense>
+  );
+  
+  export default WrappedMyPage;

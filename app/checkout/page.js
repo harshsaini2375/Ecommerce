@@ -12,6 +12,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { getcart } from '@/actions/useractions'
+import { Suspense } from 'react'
 
 
 const Page = () => {
@@ -63,7 +64,7 @@ const Page = () => {
 
     var options = {
         "key_id": process.env.NEXT_PUBLIC_RazorpayID,
-        "key_secret": process.env.NEXT_PUBLIC_RazorpaySecret,
+      //  Razorpay requires only the key (or key_id) on the client side to initialize the payment process. The key_secret is meant to stay on the server side and is used for creating the order or verifying the payment signature securely.
         "amount": Number.parseInt(amount) * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
         "currency": "INR",
         "name": "Buy Me A Chai", //your business name
@@ -201,4 +202,10 @@ const Page = () => {
   )
 }
 
-export default Page
+const WrappedMyPage = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <Page />
+  </Suspense>
+);
+
+export default WrappedMyPage;

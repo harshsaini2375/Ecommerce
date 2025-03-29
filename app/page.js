@@ -19,12 +19,12 @@ export default function Home() {
   const [productarr, setproductarr] = useState([]);
 
 
-  // useEffect(() => {
-  //   if (!session) {
-  //     router.push('/login')
-  //   }
+  useEffect(() => {
+    if (!session) {
+      router.push('/login')
+    }
 
-  // }, [session])
+  }, [session])
 
   useEffect(() => {
     getallproducts();
