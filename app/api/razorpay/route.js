@@ -40,7 +40,8 @@ export const POST = async (req) => {
 
     // let updated = await Payment.findOneAndUpdate({ oid: body.razorpay_order_id }, { done: true }, { new: true })
 
-    return NextResponse.redirect(`${process.env.NEXTAUTH_URL}?paymentdone=true`)
+    return NextResponse.redirect(`${process.env.NEXTAUTH_URL}`)
+    // return NextResponse.redirect(`${process.env.NEXTAUTH_URL}?paymentdone=true`)
     // return NextResponse.redirect(`${process.env.HOST}/${updated.to_user}?paymentdone=true`)
 
   }
