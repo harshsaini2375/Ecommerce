@@ -6,7 +6,7 @@ import clientPromise from "@/lib/mongodb";
 export const initiate = async (amount) => {
 
 
-  // first create instance
+  // first create instanc
   // second create options
   // third with the help of instance and options create generateorder
   // then return generateorder
@@ -19,7 +19,7 @@ export const initiate = async (amount) => {
     "currency": "INR"
   }
 
-  // generate order
+ 
   let generateorder = await instance.orders.create(options)
 
   // create new payment in our database like we create new user before
