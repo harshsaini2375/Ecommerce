@@ -2,8 +2,6 @@ import { NextResponse } from "next/server";
 import { validatePaymentVerification } from "razorpay/dist/utils/razorpay-utils";
 
 export const POST = async (req) => {
- 
-  try {
   let body = await req.formData()
   // return this
   // FormData {
@@ -38,10 +36,9 @@ export const POST = async (req) => {
   // update payment pending payment that exists in our database to done: true
   if (verify) {
 
-    // let updated = await Payment.findOneAndUpdate({ oid: body.razorpay_order_id }, { done: true }, { new: true })
-
+    console.log(verify);
+   
     return NextResponse.redirect(`${process.env.NEXTAUTH_URL}?paymentdone=true`)
-
   }
   else {
     return NextResponse.json({ success: false, message: "payment not verified" })
@@ -49,9 +46,4 @@ export const POST = async (req) => {
   }
 
 }
-catch (error) {
-  console.error("Error processing payment:", error.message);
-  return NextResponse.json({ success: false, message: error.message });
-}
 
-}
