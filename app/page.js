@@ -11,10 +11,9 @@ import { useRouter } from "next/navigation";
 import { allproducts } from "@/actions/useractions";
 import { useState } from "react";
 import { useSearchParams } from 'next/navigation'
+import { Suspense } from 'react'
 
-
-
-export default function Home() {
+const Home = () => {
   const { data: session } = useSession()
   const router = useRouter()
 
@@ -192,3 +191,12 @@ export default function Home() {
     </div>
   );
 }
+
+
+const WrappedMyPage = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <Home />
+  </Suspense>
+);
+
+export default WrappedMyPage;
