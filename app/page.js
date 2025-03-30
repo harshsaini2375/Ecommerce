@@ -10,11 +10,16 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { allproducts } from "@/actions/useractions";
 import { useState } from "react";
+import { useSearchParams } from 'next/navigation'
+
 
 
 export default function Home() {
   const { data: session } = useSession()
   const router = useRouter()
+
+  const searchParams = useSearchParams();
+  const paymentstatus = searchParams.get("paymentdone");
 
   const [productarr, setproductarr] = useState([]);
 
@@ -28,6 +33,9 @@ export default function Home() {
 
   useEffect(() => {
     getallproducts();
+    if(paymentstatus == "true"){
+      router.push('/')
+    }
   }, [])
 
 
