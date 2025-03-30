@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { validatePaymentVerification } from "razorpay/dist/utils/razorpay-utils";
 
 export const POST = async (req) => {
+  console.log("Request method:", req.method);
   let body = await req.formData()
   // return this
   // FormData {
@@ -13,30 +14,17 @@ export const POST = async (req) => {
   // make FormData an object
   body = Object.fromEntries(body)
 
-  // check if pending payment exists in our database
-//   let pay = await Payment.findOne({ oid: body.razorpay_order_id })
 
-//   if (!pay) {
-//     return NextResponse.json({ success: false, message: "payment object not found" })
-//   }
-
-  // fetching razorpaysecret from the User in database
-//   let u = await User.findOne({name:pay.to_user})
   let secret = process.env.RazorpaySecret
-  console.log(secret);
-  
 
   // verify payment
   let verify = validatePaymentVerification({
     "order_id": body.razorpay_order_id,
     "payment_id": body.razorpay_payment_id
   }, body.razorpay_signature, secret)
-  console.log(verify);
+  console.log("verify : " ,verify);
 
-  // update payment pending payment that exists in our database to done: true
   if (verify) {
-
-    console.log(verify);
    
     return NextResponse.redirect(`${process.env.NEXTAUTH_URL}?paymentdone=true`)
   }
