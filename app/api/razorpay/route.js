@@ -26,7 +26,7 @@ export const POST = async (req) => {
 
   if (verify) {
    
-    return NextResponse.redirect(`${process.env.NEXTAUTH_URL}?paymentdone=true`)
+    return NextResponse.redirect(`${process.env.NEXTAUTH_URL}?paymentdone=success`)
   }
   else {
     return NextResponse.json({ success: false, message: "payment not verified" })

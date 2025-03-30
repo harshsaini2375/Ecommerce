@@ -18,7 +18,6 @@ const Home = () => {
   const router = useRouter()
 
   const searchParams = useSearchParams();
-  const paymentstatus = searchParams.get("paymentdone");
 
   const [productarr, setproductarr] = useState([]);
 
@@ -28,13 +27,14 @@ const Home = () => {
       router.push('/login')
     }
 
-  }, [session])
+    if(searchParams.get("paymentdone") == "success"){
+      router.push('/')
+    }
+  }, [session, searchParams, router])
 
   useEffect(() => {
     getallproducts();
-    if(paymentstatus == "true"){
-      router.push('/')
-    }
+   
   }, [])
 
 
