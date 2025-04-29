@@ -2,6 +2,10 @@ import { NextResponse } from "next/server";
 import { validatePaymentVerification } from "razorpay/dist/utils/razorpay-utils";
 
 export const POST = async (req) => {
+
+  if (req.method !== "POST") {
+    return NextResponse.json({ error: "Method Not Allowed" }, { status: 405 });
+}
   
 
   let formData = await req.formData();
@@ -23,10 +27,10 @@ export const POST = async (req) => {
     "order_id": body.razorpay_order_id,
     "payment_id": body.razorpay_payment_id
   }, body.razorpay_signature, secret)
+  
   console.log("verify : " ,verify);
 
   if (verify) {
-   
     return NextResponse.redirect(`${process.env.NEXTAUTH_URL}?paymentdone=success`)
   }
   else {

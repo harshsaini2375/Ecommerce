@@ -60,7 +60,9 @@ const Page = () => {
     let a = await initiate(amount)
 
     let oid = a.id
+    console.log("oid");
     console.log(oid);
+    console.log("RazorpayID");
     console.log(process.env.NEXT_PUBLIC_RazorpayID);
 
     var options = {
