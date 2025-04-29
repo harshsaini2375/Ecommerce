@@ -4,6 +4,10 @@ import clientPromise from '@/lib/mongodb';
 
 export const POST = async (req) => {
 
+  const client = await clientPromise;
+  const db = client.db("ecommerce")
+  const collection = db.collection("buyer")
+ 
 
   if (req.method !== "POST") {
     return NextResponse.json({ error: "Method Not Allowed" }, { status: 405 });
@@ -33,6 +37,7 @@ export const POST = async (req) => {
   console.log("verify : " ,verify);
 
   if (verify) {
+    console.log(collection);
     return NextResponse.redirect(`${process.env.NEXTAUTH_URL}?paymentdone=success`)
   }
   else {
