@@ -26,8 +26,7 @@ export const POST = async (req) => {
 
   if (verify) {
    
-    return NextResponse.redirect("https://ecommerce-mu-nine-53.vercel.app?paymentdone=success")
-    // return NextResponse.redirect(`${process.env.NEXTAUTH_URL}?paymentdone=success`)
+    return NextResponse.redirect(`${process.env.NEXTAUTH_URL}?paymentdone=success`)
   }
   else {
     return NextResponse.json({ success: false, message: "payment not verified" })

@@ -22,18 +22,6 @@ export const initiate = async (amount) => {
  
   let generateorder = await instance.orders.create(options)
 
-  // create new payment in our database like we create new user before
-
-  // await Payment.create({
-  //     'oid': generateorder.id,
-  //     'name': paymentform.name,
-  //     'message': paymentform.message,
-  //     'to_user': to_user,
-  //     'amount': amount,
-  //     "done": isdone,
-  // })
-
-
   return generateorder;
 }
 
