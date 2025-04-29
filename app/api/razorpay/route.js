@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import { validatePaymentVerification } from "razorpay/dist/utils/razorpay-utils";
+import clientPromise from '@/lib/mongodb';
 
 export const POST = async (req) => {
+
 
   if (req.method !== "POST") {
     return NextResponse.json({ error: "Method Not Allowed" }, { status: 405 });
