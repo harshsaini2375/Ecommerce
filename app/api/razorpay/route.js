@@ -1,19 +1,12 @@
 import { NextResponse } from "next/server";
 import { validatePaymentVerification } from "razorpay/dist/utils/razorpay-utils";
-import clientPromise from '@/lib/mongodb';
 
 export const POST = async (req) => {
-
-  const client = await clientPromise;
-  const db = client.db("ecommerce")
-  const collection = db.collection("buyer")
- 
 
   if (req.method !== "POST") {
     return NextResponse.json({ error: "Method Not Allowed" }, { status: 405 });
 }
   
-
   let formData = await req.formData();
   // return this
   // FormData {
@@ -37,8 +30,8 @@ export const POST = async (req) => {
   console.log("verify : " ,verify);
 
   if (verify) {
-    console.log(collection);
-    return NextResponse.redirect(`${process.env.NEXTAUTH_URL}?paymentdone=success`)
+   
+    return NextResponse.redirect(`${process.env.NEXTAUTH_URL}/paymentdone`)
   }
   else {
     return NextResponse.json({ success: false, message: "payment not verified" })
