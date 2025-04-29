@@ -2,8 +2,9 @@ import { NextResponse } from "next/server";
 import { validatePaymentVerification } from "razorpay/dist/utils/razorpay-utils";
 
 export const POST = async (req) => {
-  console.log("Request method:", req.method);
-  let body = await req.formData()
+  
+
+  let formData = await req.formData();
   // return this
   // FormData {
   //   razorpay_payment_id: 'pay_P1ks2QiAhCj0jV',
@@ -12,7 +13,7 @@ export const POST = async (req) => {
   // }
 
   // make FormData an object
-  body = Object.fromEntries(body)
+  let body = Object.fromEntries(formData);
 
 
   let secret = process.env.RazorpaySecret
