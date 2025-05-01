@@ -45,9 +45,13 @@ export const POST = async (req) => {
 
   if (verify) {
     console.log("payment verified");
-    return NextResponse.redirect(`${process.env.NEXTAUTH_URL}`)
+    
+    // Return JSON instead of redirect
+    return NextResponse.json({
+      success: true,
+      redirectUrl: `${process.env.NEXTAUTH_URL}?payment=success`
+    });
   }
-  
 
 }
 

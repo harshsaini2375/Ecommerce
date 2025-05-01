@@ -48,46 +48,70 @@ const Page = () => {
           setcurritem(currobj);
         }
 
-
-  const pay = async (amount) => {
-
-    // first generate order id with the help of initiate
-    // use this order id in making options
-    // pass  this options to open payment window
-    // also add script as we add below
-
-
-
-    let a = await initiate(amount)
-
-    let oid = a.id
-    console.log(oid);
-
-    var options = {
-        "key": process.env.NEXT_PUBLIC_RazorpayID,
-      //  Razorpay requires only the key (or key_id) on the client side to initialize the payment process. The key_secret is meant to stay on the server side and is used for creating the order or verifying the payment signature securely.
-        "amount": Number.parseInt(amount) * 100, 
-        "currency": "INR",
-        "name": "Buy Me A Chai", 
-        "description": "Test Transaction",
-        "order_id": oid, 
-        "callback_url": `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/razorpay`,
-        "prefill": { 
-            name: 'Harsh Saini',
-            email: 'harsh@example.com',
-            contact: '9999999999'
-        },
-        "theme": {
-            "color": "#3399cc"
+// i did this from deepseek
+        const pay = async (amount) => {
+          try {
+            // 1. First generate order id
+            let a = await initiate(amount);
+            let oid = a.id;
+            console.log(oid);
+        
+            // 2. Create Razorpay options
+            var options = {
+              "key": process.env.NEXT_PUBLIC_RazorpayID,
+              "amount": Number.parseInt(amount) * 100, 
+              "currency": "INR",
+              "name": "Buy Me A Chai", 
+              "description": "Test Transaction",
+              "order_id": oid,
+              // Remove callback_url - we'll handle it differently
+              "handler": async function(response) {
+                try {
+                  // Send payment verification to your API
+                  const verification = await fetch('/api/razorpay', {
+                    method: 'POST',
+                    body: new URLSearchParams({
+                      razorpay_payment_id: response.razorpay_payment_id,
+                      razorpay_order_id: response.razorpay_order_id,
+                      razorpay_signature: response.razorpay_signature
+                    }),
+                    headers: {
+                      'Content-Type': 'application/x-www-form-urlencoded',
+                    }
+                  });
+                  
+                  const result = await verification.json();
+                  
+                  if (result.success) {
+                    // Redirect on successful verification
+                    window.location.href = `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}?payment=success`;
+                  } else {
+                    alert("Payment verification failed");
+                  }
+                } catch (error) {
+                  console.error("Payment error:", error);
+                  alert("Payment processing failed");
+                }
+              },
+              "prefill": { 
+                name: 'Harsh Saini',
+                email: 'harsh@example.com',
+                contact: '9999999999'
+              },
+              "theme": {
+                "color": "#3399cc"
+              }
+            };
+        
+            // 3. Open Razorpay payment window
+            var rzp1 = new window.Razorpay(options);
+            rzp1.open();
+        
+          } catch (error) {
+            console.error("Payment initialization failed:", error);
+            alert("Failed to initialize payment");
+          }
         }
-    };
-
-    // here we use window.razorpay to open window
-    var rzp1 = new window.Razorpay(options);
-    rzp1.open();
-
-}
-
 
   return (
     <>
