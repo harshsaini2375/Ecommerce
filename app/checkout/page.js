@@ -57,17 +57,14 @@ const Page = () => {
     // also add script as we add below
 
 
+
     let a = await initiate(amount)
 
     let oid = a.id
-    console.log("oid");
     console.log(oid);
-    console.log("RazorpayID");
-    console.log(process.env.NEXT_PUBLIC_RazorpayID);
 
     var options = {
         "key": process.env.NEXT_PUBLIC_RazorpayID,
-        
       //  Razorpay requires only the key (or key_id) on the client side to initialize the payment process. The key_secret is meant to stay on the server side and is used for creating the order or verifying the payment signature securely.
         "amount": Number.parseInt(amount) * 100, 
         "currency": "INR",
@@ -75,12 +72,11 @@ const Page = () => {
         "description": "Test Transaction",
         "order_id": oid, 
         "callback_url": `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/razorpay`,
-        "prefill": {
+        "prefill": { 
             name: 'Harsh Saini',
             email: 'harsh@example.com',
             contact: '9999999999'
         },
-        
         "theme": {
             "color": "#3399cc"
         }

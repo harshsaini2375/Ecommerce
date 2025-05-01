@@ -1,13 +1,10 @@
 import { NextResponse } from "next/server";
 import { validatePaymentVerification } from "razorpay/dist/utils/razorpay-utils";
+import clientPromise from "@/lib/mongodb";
 
-export default async function handler(req, res) {
-
-  if (req.method !== "POST") {
-    return NextResponse.json({ error: "Method Not Allowed" }, { status: 405 });
-}
-  
-  let formData = await req.formData();
+export const POST = async (req) => {
+ 
+  let body = await req.formData()
   // return this
   // FormData {
   //   razorpay_payment_id: 'pay_P1ks2QiAhCj0jV',
@@ -16,7 +13,7 @@ export default async function handler(req, res) {
   // }
 
   // make FormData an object
-  let body = Object.fromEntries(formData);
+  body = Object.fromEntries(body)
 
 
   let secret = process.env.RazorpaySecret
@@ -26,17 +23,29 @@ export default async function handler(req, res) {
     "order_id": body.razorpay_order_id,
     "payment_id": body.razorpay_payment_id
   }, body.razorpay_signature, secret)
-  
-  console.log("verify : " ,verify);
+
+  if (!verify) {
+    return NextResponse.json(
+      { success: false, message: "Payment not verified" },
+      { status: 400 }
+    );
+  }
+
+  // Update order in MongoDB
+  const client = await clientPromise;
+  const db = client.db("ecommerce")
+  const myorders = db.collection("orders")
+  await myorders.insertOne({
+    orderId: body.razorpay_order_id,
+    status: "paid",
+    paymentId: body.razorpay_payment_id,
+    createdAt: new Date() // Optional: To track when the payment was made
+  });
 
   if (verify) {
-   
-    return NextResponse.redirect(`${process.env.NEXTAUTH_URL}/paymentdone`)
+    return NextResponse.redirect(`${process.env.NEXTAUTH_URL}?paymentdone=success`)
   }
-  else {
-    return NextResponse.json({ success: false, message: "payment not verified" })
-
-  }
+  
 
 }
 
