@@ -48,7 +48,16 @@ const Page = () => {
           setcurritem(currobj);
         }
 
-// i did this from deepseek
+// i did this from deepseek, because
+// In Next.js App Router API routes:
+
+// NextResponse.redirect() works fine in local development
+
+// But fails with 405 errors in production because:
+
+// Vercel serverless functions can't properly return redirect responses
+
+// The client (browser) receives the redirect but can't follow it correctly
         const pay = async (amount) => {
           try {
             // 1. First generate order id
