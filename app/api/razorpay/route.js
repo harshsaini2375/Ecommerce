@@ -4,6 +4,9 @@ import clientPromise from "@/lib/mongodb";
 
 export const POST = async (req) => {
  
+  try{
+    
+  
   let body = await req.formData()
   // return this
   // FormData {
@@ -42,10 +45,20 @@ export const POST = async (req) => {
     createdAt: new Date() // Optional: To track when the payment was made
   });
 
-  if (verify) {
-    return NextResponse.redirect(`${process.env.NEXTAUTH_URL}?paymentdone=success`)
-  }
+  return NextResponse.json({
+    success: true,
+    redirectUrl: `${process.env.NEXTAUTH_URL}?payment=success`
+  });
   
+  }
 
+
+  catch (error) {
+    console.error("Payment verification error:", error);
+    return NextResponse.json(
+      { success: false, message: "Payment processing failed" },
+      { status: 500 }
+    );
+  }
 }
 
