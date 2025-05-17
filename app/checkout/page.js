@@ -93,7 +93,7 @@ const Page = () => {
                   
                   if (result.success) {
                     // Redirect on successful verification
-                    window.location.href = `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/paymentdone?oid=${oid}`;
+                    window.location.href = `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/paymentdone?oid=${oid}&amount=${amount}`;
                   } else {
                     alert("Payment verification failed");
                   }
