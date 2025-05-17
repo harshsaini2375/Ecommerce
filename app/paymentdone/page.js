@@ -3,6 +3,8 @@
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import Head from "next/head";
 import { useSearchParams } from 'next/navigation'
+import Link from "next/link";
+
 
 
 export default function PaymentSuccess() {
@@ -29,12 +31,7 @@ export default function PaymentSuccess() {
             </p>
           </div>
           <div className="mt-10">
-            <a
-              href="/"
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 max-w-xs mx-auto"
-            >
-              Back to Home
-            </a>
+            <Link href="/" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 max-w-xs mx-auto">Back to home</Link>
           </div>
         </div>
       </div>
