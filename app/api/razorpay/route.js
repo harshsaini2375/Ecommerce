@@ -49,7 +49,7 @@ export const POST = async (req) => {
     // Return JSON instead of redirect
     return NextResponse.json({
       success: true,
-      redirectUrl: `${process.env.NEXTAUTH_URL}?payment=success`
+      redirectUrl: `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/paymentdone?oid=${oid}`
     });
   }
 
