@@ -69,7 +69,7 @@ const Navbar = () => {
       </div>
       <div className='w-screen px-2 md:px-0 py-2 md:h-[13vh]  border-gray-500 border-b-2 flex items-center justify-around md:pt-5'>
 
-        <ul className='md:h-full h-[7vh] w-full md:w-fit bottom-0 bg-white md:z-0 z-50 md:static fixed space-x-8 flex justify-center items-center text-gray-600 md:border-0 border-t-[1px] border-gray-500'>
+        <ul className='md:h-full h-[7vh] w-full md:w-fit bottom-0 bg-white md:z-0 z-50 md:static fixed md:space-x-8 space-x-5 md:text-base text-sm flex justify-center items-center text-gray-600 md:border-0 border-t-[1px] border-gray-500'>
           <Link href="/">Home</Link>
           <Link href="/privacypolicy">Privacy Policy</Link>
           <Link href="/terms">Terms &#38; Conditions</Link>
