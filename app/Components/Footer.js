@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -11,23 +12,23 @@ const Footer = () => {
       </div>
       <div className="second border-2 border-black flex flex-col pt-10 items-center gap-2 w-[15vw]">
       <h1 className='font-bold text-lg'>Support</h1> 
-        <div className='text-sm'>111 Bijoy sarani&#44; Dhaka&#44; Sector 14  DH 1515&#44; Rohtak&#44; Haryana&#44; India&#46;</div>
-        <div className='text-sm'>exclusive@gmail&#46;com</div>
+        <div className='text-sm'>Rohtak&#44; Haryana&#44; India&#46;</div>
+        <div className='text-sm'>harshsaini2375@gmail&#46;com</div>
         <div className='text-sm'>88015&#45;88888&#45;9999</div>
       </div>
       <div className="third border-2 border-black flex flex-col pt-10 items-center gap-2 w-[15vw]">
         <h1 className='font-bold text-lg'>Account</h1>
-        <div className='text-sm'>My Account</div>
         <div className='text-sm'>Login / Register</div>
-        <div className='text-sm'>Cart</div>
-        <div className='text-sm'>Wishlist</div>
+        <Link href="/signup">SignUp</Link>
+        <Link href="/cart">Cart</Link>
+        <Link href="/wishlist">Wishlist</Link>
       </div>
       <div className="fourth border-2 border-black flex flex-col pt-10 items-center gap-2 w-[15vw]">
         <h1 className='font-bold text-lg'>Quick Links</h1>
-        <div className='text-sm'>Privacy Policy</div>
-        <div className='text-sm'>Terms Of Use</div>
-        <div className='text-sm'>FAQ</div>
-        <div className='text-sm'>Contact</div>
+        <Link href="/privacypolicy">Privacy Policy</Link>
+        <Link href="/shippingpolicy">Shipping Policy</Link>
+        <Link href="/terms">Terms &#38; Conditions</Link>
+        <Link href="/refunds">Cancellation &#38; Refunds</Link>
         
       </div>
       
